@@ -51,19 +51,16 @@ $voterId          = $_SESSION['voter_id'] ?? '';
 $precinct         = $_SESSION['precinct'] ?? '';
 $userStatus       = 'pending';
 
-// ID Image - store relative path for display
+// ID Image - store only the filename. Admin pages prepend
+// /uploads/id_verification/ themselves.
 $frontIdImage = '';
-if (!empty($_SESSION['saved_id_upload']['front']['path'])) {
-    $frontPath = str_replace('\\', '/', $_SESSION['saved_id_upload']['front']['path']);
-    $basePath = str_replace('\\', '/', dirname(__DIR__));
-    $frontIdImage = str_replace($basePath . '/', '../', $frontPath);
+if (!empty($_SESSION['saved_id_upload']['front']['name'])) {
+    $frontIdImage = basename($_SESSION['saved_id_upload']['front']['name']);
 }
 
 $backIdImage = '';
-if (!empty($_SESSION['saved_id_upload']['back']['path'])) {
-    $backPath = str_replace('\\', '/', $_SESSION['saved_id_upload']['back']['path']);
-    $basePath = str_replace('\\', '/', dirname(__DIR__));
-    $backIdImage = str_replace($basePath . '/', '../', $backPath);
+if (!empty($_SESSION['saved_id_upload']['back']['name'])) {
+    $backIdImage = basename($_SESSION['saved_id_upload']['back']['name']);
 }
 
 // DateRegistered - current date in local timezone (e.g., Manila)

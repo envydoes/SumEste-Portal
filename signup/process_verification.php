@@ -91,13 +91,22 @@ foreach (['front' => $_FILES['id_front'], 'back' => $_FILES['id_back']] as $side
         redirectWithError('Invalid ' . $side . ' ID format. Allowed: JPG, PNG, PDF.');
     }
 
-    $originalName = (string)($file['name'] ?? ($side . '.bin'));
-    $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
-    if ($extension === '') {
-        $extension = 'bin';
+       // Extension comes from the validated MIME type, never from the
+    // user-supplied filename (prevents uploading e.g. shell.php).
+    $extMap = [
+        'image/jpeg' => 'jpg', 'image/jpg' => 'jpg', 'image/pjpeg' => 'jpg',
+        'image/png'  => 'png', 'image/x-png' => 'png',
+        'application/pdf' => 'pdf',
+    ];
+    $extension = $extMap[$mimeType] ?? null;
+    if ($extension === null) {
+        redirectWithError('Invalid ' . $side . ' ID format. Allowed: JPG, PNG, PDF.');
     }
 
-    $targetPath = $targetDir . '/' . $safeSession . '_' . $side . '.' . $extension;
+    // Unique name so two registrations from the same browser session
+    // can never overwrite each other's ID.
+    $uniq = bin2hex(random_bytes(8));
+    $targetPath = $targetDir . '/' . $safeSession . '_' . $uniq . '_' . $side . '.' . $extension;
     if (!move_uploaded_file($tmpPath, $targetPath)) {
         redirectWithError('Failed to save uploaded ' . $side . ' ID file.');
     }
