@@ -24,7 +24,7 @@ Capstone project for BS Information Technology, Nueva Ecija University of Scienc
 | Backend | PHP (MySQLi) |
 | Database | MySQL / MariaDB |
 | Frontend | Tailwind CSS, vanilla JavaScript |
-| Email | PHPMailer (SMTP) |
+| Email | Brevo (SMTP) |
 | Spreadsheets | PhpSpreadsheet |
 | Deployment | Docker, Apache |
 
