@@ -94,6 +94,4 @@ docker compose up -d --build
   John Patrick A. Macapagal
 **
 
-## License
 
-This project was built for academic purposes. All rights reserved unless a license is added.
