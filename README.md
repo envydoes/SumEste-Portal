@@ -2,8 +2,6 @@
 
 A barangay management web portal for **Barangay Sumacab Este, Cabanatuan City**. It lets residents and non-residents access barangay services online, and gives barangay staff an admin dashboard to manage users, announcements, and listings.
 
-Capstone project for BS Information Technology, Nueva Ecija University of Science and Technology (NEUST).
-
 **Live site:** https://sum-este-portal.digital/
 
 ## Features
